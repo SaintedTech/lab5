@@ -1,5 +1,10 @@
 package edu.jsu.mcis.cs408.lab5a;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import androidx.annotation.Nullable;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Method;
@@ -16,13 +21,13 @@ public class MemoPadController implements PropertyChangeListener {
 
     public static String DISPLAYTAG = "display";
 
-    private ArrayList<AbstractView> views;
+    private MainActivity view;
 
 
 
-    public MemoPadController(Model model) {
+    public MemoPadController(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
 
-        this.model = model;
+        this.model = new Model(context, name, factory, version);
         addModel(model);
 
     }
@@ -41,16 +46,16 @@ public class MemoPadController implements PropertyChangeListener {
 
     }
 
-    public void addView(AbstractView view) {
+    public void addView(MainActivity view) {
 
 
-        views.add(view);
+      view = view;
 
     }
 
     public void removeView(AbstractView view) {
 
-        views.remove(view);
+       view = null;
 
     }
 
@@ -58,9 +63,7 @@ public class MemoPadController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
 
 
-        for (AbstractView view : views) {
-            view.modelPropertyChange(evt);
-        }
+
 
     }
 
@@ -77,5 +80,24 @@ public class MemoPadController implements PropertyChangeListener {
             e.printStackTrace();
         }
 
+    }
+    protected void establishConnection(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+
+        try {
+            model = new Model(context, name, factory, version);
+
+        }
+
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    protected void addMemo(Memo m){
+        model.addMemo(m);
+
+    }
+    protected ArrayList<Memo> getMemos(){
+        return model.getAllMemosAsList();
     }
 }

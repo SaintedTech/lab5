@@ -29,7 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.setContact(data.get(position));
+        holder.setMemo(data.get(position));
         holder.bindData();
     }
 

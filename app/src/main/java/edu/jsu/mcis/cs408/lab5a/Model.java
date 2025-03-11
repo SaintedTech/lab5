@@ -51,7 +51,7 @@ public class Model extends SQLiteOpenHelper {
 
     }
 
-    public Memo getContact(int id) {
+    public Memo getMemo(int id) {
 
         String query = "SELECT * FROM " + TABLE_MEMOS + " WHERE " + COLUMN_ID + " = " + id;
 
@@ -86,7 +86,7 @@ public class Model extends SQLiteOpenHelper {
             cursor.moveToFirst();
             do {
                 int id = cursor.getInt(0);
-                s.append(getContact(id)).append("\n");
+                s.append(getMemo(id)).append("\n");
             }
             while ( cursor.moveToNext() );
         }
@@ -96,7 +96,7 @@ public class Model extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<Memo> getAllContactsAsList() {
+    public ArrayList<Memo> getAllMemosAsList() {
 
         String query = "SELECT * FROM " + TABLE_MEMOS;
 
