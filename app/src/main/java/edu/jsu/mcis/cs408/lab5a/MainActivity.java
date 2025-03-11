@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity{
   // private Model model;
 
     private MemoPadController controller;
-    private int memoIdForDel = 0;
+    private int memoIdForDel = 1;
     private final MemoPadItemClickHandler itemClick = new MemoPadItemClickHandler();
 
 
