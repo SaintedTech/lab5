@@ -1,5 +1,6 @@
 package edu.jsu.mcis.cs408.lab5a;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity{
 
     private MemoPadController controller;
     private int memoIdForDel = 1;
+    private ArrayList<Integer> idsForDel = new ArrayList<>();
     private final MemoPadItemClickHandler itemClick = new MemoPadItemClickHandler();
 
 
@@ -29,6 +31,11 @@ public class MainActivity extends AppCompatActivity{
     private boolean deleteMemo(){
 
         return controller.deleteMemo(this.memoIdForDel);
+
+    }
+    private boolean deleteMemos(){
+
+        return controller.deleteMemos(this.idsForDel);
 
     }
     private void updatePosition(){
@@ -48,6 +55,16 @@ public class MainActivity extends AppCompatActivity{
             if (adapter != null) {
                 Memo memo = adapter.getMemo(position);
                 memoIdForDel = memo.getId();
+                if(idsForDel.contains(memo)){
+                    idsForDel.remove(memo.getId());
+                    v.setBackgroundColor(Color.WHITE);
+
+                }
+                else{
+                    idsForDel.add(memo.getId());
+                    v.setBackgroundColor(Color.GRAY);
+                }
+
 
                 Toast.makeText(v.getContext(), String.valueOf(memoIdForDel), Toast.LENGTH_SHORT).show();
             }
@@ -101,7 +118,13 @@ public class MainActivity extends AppCompatActivity{
         binding.deleteMemo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteMemo();
+                if(idsForDel.size() == 1) {
+                    deleteMemo();
+                }
+                else if(idsForDel.size() >= 1){
+                    deleteMemos();
+                }
+
                 updateRecyclerView();
 
 

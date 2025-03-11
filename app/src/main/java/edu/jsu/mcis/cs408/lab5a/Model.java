@@ -93,6 +93,33 @@ public class Model extends SQLiteOpenHelper {
 
         return false;
     }
+    public boolean deleteMemos(ArrayList<Integer> ids){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rowsDeleted = 0;
+
+        try {
+            for(int i = 0; i < ids.size(); i++) {
+                String[] args = {String.valueOf(ids.get(i))};
+                rowsDeleted = db.delete(TABLE_MEMOS, "_id=?", args);
+
+
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
+        finally{
+            db.close();
+        }
+
+        if (rowsDeleted >= 1) {
+            return true;
+        }
+
+
+
+        return false;
+    }
 
     public String getAllMemos() {
 

@@ -104,6 +104,9 @@ public class MemoPadController implements PropertyChangeListener {
         return model.deleteMemo(id);
 
     }
+    protected boolean deleteMemos(ArrayList<Integer> ids){
+        return model.deleteMemos(ids);
+    }
 
     protected ArrayList<Memo> getMemos(){
         return model.getAllMemosAsList();
