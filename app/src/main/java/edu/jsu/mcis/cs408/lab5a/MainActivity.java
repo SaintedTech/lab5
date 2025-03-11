@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity{
         binding.output.setHasFixedSize(true);
         binding.output.setLayoutManager(new LinearLayoutManager(this));
         binding.output.setAdapter(adapter);
+        int y = 1;
     }
 
 }

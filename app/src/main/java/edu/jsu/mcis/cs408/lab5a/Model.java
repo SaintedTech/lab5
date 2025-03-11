@@ -124,7 +124,7 @@ public class Model extends SQLiteOpenHelper {
     }
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
-        int y = 1;
+
 
     }
 

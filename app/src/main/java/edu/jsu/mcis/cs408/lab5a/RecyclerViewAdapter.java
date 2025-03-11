@@ -11,7 +11,7 @@ import java.util.List;
 
 import edu.jsu.mcis.cs408.lab5a.databinding.MemoBinding;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private MemoBinding binding;
     private List<Memo> data;
@@ -43,7 +43,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private Memo memo;
         private TextView textLabel;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
         }
@@ -62,7 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 textLabel = (TextView) itemView.findViewById(R.id.textLabel);
             }
 
-            textLabel.setText(memo.getMemo());
+            textLabel.setText(memo.toString());
 
 
         }
