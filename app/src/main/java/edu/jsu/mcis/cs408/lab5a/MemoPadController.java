@@ -14,12 +14,10 @@ public class MemoPadController implements PropertyChangeListener {
 
 
 
-    private String display = "display";
 
 
     private Model model;
-
-    public static String DISPLAYTAG = "display";
+    private ArrayList<Model> models;
 
     private MainActivity view;
 
@@ -28,7 +26,10 @@ public class MemoPadController implements PropertyChangeListener {
     public MemoPadController(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
 
         this.model = new Model(context, name, factory, version);
+        models = new ArrayList<>();
         addModel(model);
+
+
 
     }
 
@@ -36,6 +37,7 @@ public class MemoPadController implements PropertyChangeListener {
 
 
         model.addPropertyChangeListener(this);
+        models.add(model);
 
     }
 
@@ -43,6 +45,7 @@ public class MemoPadController implements PropertyChangeListener {
 
 
         model.removePropertyChangeListener(this);
+        models.remove(model);
 
     }
 

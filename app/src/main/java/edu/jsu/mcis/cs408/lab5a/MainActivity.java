@@ -17,7 +17,7 @@ import edu.jsu.mcis.cs408.lab5a.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
-    private Model model;
+  // private Model model;
 
     private MemoPadController controller;
 
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         controller = new MemoPadController(this, null, null, 1);
+
         controller.addView(this);
 
         super.onCreate(savedInstanceState);
@@ -37,12 +38,15 @@ public class MainActivity extends AppCompatActivity{
         setContentView(view);
         updateRecyclerView();
 
+
         binding.createMemo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                addNewMemo();
             }
         });
+
+
     }
     public void addNewMemo() {
 
@@ -52,8 +56,10 @@ public class MainActivity extends AppCompatActivity{
     }
     private void updateRecyclerView() {
 
-        //Will need to move to work with fire property change
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(controller.getMemos());
+
+
+        ArrayList<Memo> memos = controller.getMemos();
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(memos);
         binding.output.setHasFixedSize(true);
         binding.output.setLayoutManager(new LinearLayoutManager(this));
         binding.output.setAdapter(adapter);

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class Model extends SQLiteOpenHelper {
 
     public Model(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
     @Override
@@ -122,6 +124,8 @@ public class Model extends SQLiteOpenHelper {
     }
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
+        int y = 1;
+
     }
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
