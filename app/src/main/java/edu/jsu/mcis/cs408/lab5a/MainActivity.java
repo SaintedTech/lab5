@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity{
         return controller.deleteMemo(this.memoIdForDel);
 
     }
+    private void updatePosition(){
+        //gets first id for del
+        ArrayList<Memo> memos = controller.getMemos();
+        if(!memos.isEmpty()) {
+            memoIdForDel = memos.get(0).getId();
+        }
+    }
 
     //main class, moved databasehandler to Model. Abstracted through contoller.
     private class MemoPadItemClickHandler implements View.OnClickListener {
@@ -52,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
         String info = binding.memoInput2.getText().toString();
         controller.addMemo(new Memo(info));
         updateRecyclerView();
+
     }
     private void updateRecyclerView() {
 
@@ -62,6 +70,7 @@ public class MainActivity extends AppCompatActivity{
         binding.output.setHasFixedSize(true);
         binding.output.setLayoutManager(new LinearLayoutManager(this));
         binding.output.setAdapter(adapter);
+
 
     }
     @Override
@@ -79,11 +88,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(view);
         updateRecyclerView();
 
-        //gets first id for del
-       ArrayList<Memo> memos = controller.getMemos();
-       if(!memos.isEmpty()) {
-           memoIdForDel = memos.get(0).getId();
-       }
+        updatePosition();
 
 
 
@@ -96,11 +101,7 @@ public class MainActivity extends AppCompatActivity{
         binding.deleteMemo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean deleted =   deleteMemo();
-                if(deleted){
-                    memoIdForDel+=1;
-                }
-
+                deleteMemo();
                 updateRecyclerView();
 
 
