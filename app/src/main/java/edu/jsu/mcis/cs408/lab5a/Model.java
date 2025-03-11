@@ -67,12 +67,31 @@ public class Model extends SQLiteOpenHelper {
             String newInfo = cursor.getString(1);
 
             cursor.close();
-            m = new Memo (newId, newInfo);
+            m = new Memo(newId, newInfo);
         }
 
         db.close();
         return m;
 
+
+    }
+    public boolean deleteMemo(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] args = {String.valueOf(id)};
+        try {
+            int rowsDeleted = db.delete(TABLE_MEMOS, "_id=?", args);
+            db.close();
+            if (rowsDeleted >= 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
+
+
+
+        return false;
     }
 
     public String getAllMemos() {

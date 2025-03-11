@@ -39,7 +39,7 @@ public class Memo {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("ID: ").append(id).append("\n");
+        s.append("#").append(this.id).append(':').append(" ");
         s.append("Memo: ").append(memo).append("\n");
         return s.toString();
     }

@@ -16,14 +16,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private MemoBinding binding;
     private List<Memo> data;
 
-    public RecyclerViewAdapter(List<Memo> data) {
+    private MainActivity activity;
+
+
+    public RecyclerViewAdapter(MainActivity activity, List<Memo> data) {
+
+        super();
         this.data = data;
+        this.activity = activity;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         binding = MemoBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         ViewHolder holder = new ViewHolder(binding.getRoot());
+        binding.getRoot().setOnClickListener(activity.getItemClick()); // the click handler
         return holder;
     }
 
@@ -36,6 +43,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount() {
         return data.size();
+    }
+    public Memo getMemo(int position){
+        return this.data.get(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
